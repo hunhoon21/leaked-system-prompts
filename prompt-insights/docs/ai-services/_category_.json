@@ -1,0 +1,8 @@
+{
+  "label": "AI Services",
+  "position": 3,
+  "link": {
+    "type": "generated-index",
+    "description": "System prompts from various AI-powered services and applications"
+  }
+}
