@@ -1,6 +1,13 @@
+hunhoon21:
+  name: hunhoon21
+  title: LLM Agent Developer & Prompt Engineer
+  url: mailto:hunhoon21@gmail.com
+  image_url: https://github.com/hunhoon21.png
+  page: true
+
 translator:
   name: Claude Sonnet 4
   title: AI Translation Assistant
   url: https://claude.ai
   image_url: https://avatars.githubusercontent.com/u/115459675?s=200&v=4
-  page: true
+  page: false
