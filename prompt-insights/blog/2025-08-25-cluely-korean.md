@@ -1,7 +1,7 @@
 ---
 slug: cluely-korean-translation
 title: Cluely 실시간 회의 코파일럿 프롬프트 분석
-authors: [translator]
+authors: [hunhoon21]
 tags: [cluely, korean, translation, meeting-assistant]
 date: 2025-08-25
 ---
