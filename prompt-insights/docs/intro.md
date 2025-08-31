@@ -1,35 +1,56 @@
-# AI Prompt Insights
+# AI 프롬프트 인사이트
 
-Welcome to AI Prompt Insights - a curated collection of system prompts from major tech companies and AI services.
+## 훌륭한 LLM 에이전트는 어떻게 만들어질까?
 
-## What you'll find here
+ChatGPT API, Claude API, Gemini API를 활용해서 실제 서비스를 만드는 개발자라면 한 번쯤 고민해봤을 질문입니다. 단순한 채팅봇을 넘어서, **사용자에게 진짜 도움이 되는 AI 에이전트**를 만들려면 어떤 프롬프트 전략이 필요할까요?
 
-This documentation contains system prompts from:
+이 사이트는 **실제 서비스에서 사용되는 프롬프트를 분석**하여, LLM 에이전트 개발의 실전 노하우를 공유합니다.
 
-### 🏢 Big Tech
-- **OpenAI** - ChatGPT, DALL-E, and other AI services
-- **Anthropic** - Claude family of AI assistants
-- **Google** - Gemini and other AI models
-- **Microsoft** - Copilot and AI-powered tools
-- **xAI** - Grok and experimental AI systems
+## 왜 실제 서비스의 프롬프트를 분석하는가?
 
-### 🚀 AI Services
-- Various AI-powered applications and specialized services
-- Coding assistants, chatbots, and domain-specific AI tools
-- Including Korean AI services like Cluely, WRTN, and others
+### 💡 이론보다는 실전 검증된 사례
+- OpenAI나 Anthropic의 기본 시스템 프롬프트도 중요하지만, **실제 서비스에서 어떻게 활용하는지**가 더 핵심입니다
+- Cluely (회의록 정리), Cursor (코딩 어시스턴트), Perplexity (검색 에이전트) 등 **검증된 서비스의 프롬프트 전략**을 분석합니다
+- 단순한 템플릿이 아닌, **실제 사용자 시나리오에서 동작하는 프롬프트**를 연구합니다
 
-## Purpose
+### 🔍 LLM 에이전트의 핵심 패턴 발견
+- **역할 정의**: 에이전트에게 어떤 페르소나와 전문성을 부여하는가?
+- **컨텍스트 관리**: 긴 대화와 복잡한 작업에서 어떻게 정보를 유지하는가?
+- **도구 활용**: API 호출, 파일 처리, 웹 검색 등을 어떻게 프롬프트로 제어하는가?
+- **에러 핸들링**: 예외 상황과 모호한 입력을 어떻게 처리하는가?
 
-These prompts provide valuable insights into:
-- How different companies approach AI system design
-- Prompt engineering techniques and patterns
-- Evolution of AI capabilities over time
-- Best practices in AI safety and alignment
+### 🎯 당신의 서비스에 바로 적용 가능한 인사이트
+이 분석을 통해 다음을 배울 수 있습니다:
+- **도메인별 최적화**: 회의록, 코딩, 검색, 번역 등 각 영역의 특화 전략
+- **사용자 경험 설계**: 프롬프트로 어떻게 자연스러운 상호작용을 만드는가
+- **성능 최적화**: 토큰 효율성과 응답 품질의 균형점
+- **안전성 확보**: 악용 방지와 신뢰성 있는 출력 보장 방법
 
-## Navigation
+## 다루는 내용
 
-Browse by company/service category using the sidebar, or check out the blog section for additional translations and commentary.
+### 🏢 거대 기업 프롬프트
+- **OpenAI**: ChatGPT, DALL-E 시스템 프롬프트 분석
+- **Anthropic**: Claude 모델별 특성과 활용법
+- **Google**: Gemini 에코시스템의 프롬프트 전략
+- **Microsoft**: Copilot 시리즈의 도구 통합 방식
+- **xAI**: Grok의 실험적 접근법
+
+### 🚀 실전 서비스 사례
+- **한국 서비스**: Cluely, WRTN 등의 로컬라이즈된 전략
+- **글로벌 도구**: Cursor, Perplexity, Discord Clyde 등의 실전 프롬프트
+- **도메인별 특화**: 코딩, 검색, 번역, 콘텐츠 생성 등 영역별 베스트 프랙티스
+
+## 앞으로의 계획
+
+현재는 프롬프트 수집과 분석이 주 목적이지만, 곧 다음을 추가할 예정입니다:
+
+- **프롬프트 쿡북**: 바로 사용할 수 있는 에이전트별 템플릿
+- **실험 결과**: A/B 테스트를 통한 프롬프트 최적화 결과
+- **구현 가이드**: 프롬프트 패턴을 실제 코드로 구현하는 방법
+- **커뮤니티**: 개발자들의 프롬프트 엔지니어링 경험 공유
 
 ---
 
-*This collection is for educational and research purposes to understand AI system design patterns.*
+**더 나은 LLM 에이전트를 만들기 위한 여정을 함께 시작해보세요.**
+
+*Contact: hunhoon21@gmail.com*

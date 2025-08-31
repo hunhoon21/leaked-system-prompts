@@ -11,32 +11,32 @@ type FeatureItem = {
 
 const FeatureList: FeatureItem[] = [
   {
-    title: 'Easy to Use',
+    title: '실전 프롬프트 분석',
     Svg: require('@site/static/img/undraw_docusaurus_mountain.svg').default,
     description: (
       <>
-        Docusaurus was designed from the ground up to be easily installed and
-        used to get your website up and running quickly.
+        Cluely, Cursor, Perplexity 같은 <strong>실제 서비스</strong>에서 사용되는 
+        프롬프트를 분석하여 검증된 패턴과 전략을 공유합니다.
       </>
     ),
   },
   {
-    title: 'Focus on What Matters',
+    title: 'LLM 에이전트 최적화',
     Svg: require('@site/static/img/undraw_docusaurus_tree.svg').default,
     description: (
       <>
-        Docusaurus lets you focus on your docs, and we&apos;ll do the chores. Go
-        ahead and move your docs into the <code>docs</code> directory.
+        역할 정의, 컨텍스트 관리, 도구 활용 등 <strong>에이전트 개발의 핵심 요소</strong>들을 
+        체계적으로 분석하고 베스트 프랙티스를 제시합니다.
       </>
     ),
   },
   {
-    title: 'Powered by React',
+    title: '바로 적용 가능한 인사이트',
     Svg: require('@site/static/img/undraw_docusaurus_react.svg').default,
     description: (
       <>
-        Extend or customize your website layout by reusing React. Docusaurus can
-        be extended while reusing the same header and footer.
+        이론이 아닌 <strong>실무에서 바로 활용</strong>할 수 있는 프롬프트 패턴과 
+        구현 가이드를 제공합니다.
       </>
     ),
   },

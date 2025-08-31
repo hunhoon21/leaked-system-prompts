@@ -21,7 +21,7 @@ function HomepageHeader() {
           <Link
             className="button button--secondary button--lg"
             to="/docs/intro">
-            Docusaurus Tutorial - 5min ⏱️
+            프롬프트 인사이트 시작하기 🚀
           </Link>
         </div>
       </div>
@@ -33,8 +33,8 @@ export default function Home(): ReactNode {
   const {siteConfig} = useDocusaurusContext();
   return (
     <Layout
-      title={`Hello from ${siteConfig.title}`}
-      description="Description will go into a meta tag in <head />">
+      title={`${siteConfig.title} - LLM 에이전트 개발을 위한 프롬프트 분석`}
+      description="실제 서비스에서 사용되는 프롬프트를 분석하여 LLM 에이전트 개발의 실전 노하우를 공유합니다.">
       <HomepageHeader />
       <main>
         <HomepageFeatures />
