@@ -65,39 +65,181 @@ Cluely: "ONLY 최신 맥락" + "CURRENT MOMENT만 우선"
 ## 💡 실무 적용 가이드
 
 ### **1. 도메인 특화 프롬프트 설계**
-```typescript
-// ❌ 범용적 접근
-"당신은 도움이 되는 AI입니다. 질문에 답해주세요."
+```python
+# ❌ 범용적 접근
+GENERIC_PROMPT = "당신은 도움이 되는 AI입니다. 질문에 답해주세요."
 
-// ✅ Cluely식 특화 접근
-"당신은 실시간 회의 코파일럿입니다. 최신 맥락만 활용하세요."
+# ✅ Cluely식 특화 접근
+MEETING_COPILOT_PROMPT = """
+당신은 실시간 회의 코파일럿입니다. 
+가장 최근 맥락만을 우선시하세요.
+"""
 ```
 
 ### **2. 계층적 의사결정 구현**
-```typescript
-const decisionTree = [
-  { condition: 'hasRecentQuestion', action: 'answerDirectly' },
-  { condition: 'hasProperNoun', action: 'defineToken' },
-  { condition: 'hasScreenProblem', action: 'solveProblem' },
-  { condition: 'default', action: 'fallbackMode' }
-]
+```python
+from dataclasses import dataclass
+from typing import Optional, Callable
+
+@dataclass
+class DecisionRule:
+    condition: Callable[[str], bool]
+    action: Callable[[str], str]
+    priority: int
+
+class CuelyDecisionEngine:
+    def __init__(self):
+        self.rules = [
+            DecisionRule(
+                condition=self.has_recent_question,
+                action=self.answer_directly,
+                priority=1
+            ),
+            DecisionRule(
+                condition=self.has_proper_noun,
+                action=self.define_token,
+                priority=2
+            ),
+            DecisionRule(
+                condition=self.has_screen_problem,
+                action=self.solve_problem,
+                priority=3
+            ),
+            DecisionRule(
+                condition=lambda _: True,  # fallback
+                action=self.fallback_mode,
+                priority=4
+            )
+        ]
+    
+    def process(self, transcript: str) -> str:
+        for rule in sorted(self.rules, key=lambda r: r.priority):
+            if rule.condition(transcript):
+                return rule.action(transcript)
 ```
 
 ### **3. 응답 제약 시스템**
-```typescript
-interface ResponseConstraints {
-  headline: { maxWords: 6 };
-  mainBullets: { maxWords: 15, count: 2 };
-  subBullets: { maxWords: 20, count: 2 };
-}
+```python
+from dataclasses import dataclass
+from typing import List
+
+@dataclass
+class ResponseConstraints:
+    max_headline_words: int = 6
+    max_main_bullet_words: int = 15
+    max_sub_bullet_words: int = 20
+    max_main_bullets: int = 2
+    max_sub_bullets_per_main: int = 2
+
+class ResponseFormatter:
+    def __init__(self, constraints: ResponseConstraints):
+        self.constraints = constraints
+    
+    def format_response(self, content: dict) -> str:
+        # 헤드라인 길이 체크
+        headline = self._truncate_words(
+            content['headline'], 
+            self.constraints.max_headline_words
+        )
+        
+        # 불릿 포인트 형식화
+        formatted_bullets = []
+        for bullet in content['main_bullets'][:self.constraints.max_main_bullets]:
+            main_text = self._truncate_words(bullet['text'], self.constraints.max_main_bullet_words)
+            formatted_bullets.append(f"• {main_text}")
+            
+            # 서브 불릿
+            for sub in bullet['sub_bullets'][:self.constraints.max_sub_bullets_per_main]:
+                sub_text = self._truncate_words(sub, self.constraints.max_sub_bullet_words)
+                formatted_bullets.append(f"  - {sub_text}")
+        
+        return f"{headline}\n" + "\n".join(formatted_bullets)
+    
+    def _truncate_words(self, text: str, max_words: int) -> str:
+        words = text.split()
+        if len(words) <= max_words:
+            return text
+        return ' '.join(words[:max_words]) + '...'
 ```
 
 ### **4. 환각 방지 패턴**
-```typescript
-// 불확실할 때의 표준 응답
-if (!hasVerifiedInfo) {
-  return "X에 대한 정보 제한. 추측하지 않겠습니다.";
-}
+```python
+from typing import Optional, Any
+
+class HallucinationPrevention:
+    @staticmethod
+    def safe_response(info: Optional[Any], context: str) -> str:
+        """불확실할 때의 표준 응답"""
+        if not info or not HallucinationPrevention._is_verified(info, context):
+            return f"{context}에 대한 정보 제한. 추측하지 않겠습니다."
+        return HallucinationPrevention._format_verified_info(info)
+    
+    @staticmethod
+    def _is_verified(info: Any, context: str) -> bool:
+        # 검증된 정보인지 확인하는 로직
+        return hasattr(info, 'source') and info.source == 'verified'
+    
+    @staticmethod
+    def _format_verified_info(info: Any) -> str:
+        return f"검증된 정보: {info.content}"
+
+# 사용 예시
+def handle_company_query(company_name: str, user_context: dict) -> str:
+    company_info = user_context.get('companies', {}).get(company_name)
+    return HallucinationPrevention.safe_response(company_info, company_name)
+```
+
+### **5. 완전한 Cluely 스타일 에이전트 구현**
+```python
+import re
+from typing import Dict, List, Optional
+from dataclasses import dataclass
+
+@dataclass
+class MeetingContext:
+    transcript: str
+    screen_content: Optional[str] = None
+    user_history: Dict = None
+
+class CuelyMeetingAgent:
+    def __init__(self):
+        self.constraints = ResponseConstraints()
+        self.formatter = ResponseFormatter(self.constraints)
+        self.decision_engine = CuelyDecisionEngine()
+    
+    def process_meeting_input(self, context: MeetingContext) -> str:
+        """Cluely 스타일의 회의 입력 처리"""
+        
+        # 1. 최신 맥락만 우선 (Cluely 핵심 원칙)
+        recent_context = self._extract_recent_context(context.transcript)
+        
+        # 2. 계층적 의사결정 적용
+        response = self.decision_engine.process(recent_context)
+        
+        # 3. 응답 제약 적용
+        return self._apply_constraints(response)
+    
+    def _extract_recent_context(self, transcript: str, max_lines: int = 3) -> str:
+        """최신 맥락만 추출"""
+        lines = transcript.strip().split('\n')
+        return '\n'.join(lines[-max_lines:])
+    
+    def _apply_constraints(self, response: str) -> str:
+        """Cluely 스타일 제약 적용"""
+        # 대명사 제거, 명령형 언어 사용 등
+        response = re.sub(r'\b(나는|저는|제가)\b', '', response)
+        response = re.sub(r'\b(해드리겠습니다|도와드리겠습니다)\b', '', response)
+        return response.strip()
+
+# 사용 예시
+agent = CuelyMeetingAgent()
+meeting_context = MeetingContext(
+    transcript="회의록 정리 도구 추천해주세요. Notion이 좋을까요?",
+    user_history={"preferences": ["productivity_tools"]}
+)
+
+response = agent.process_meeting_input(meeting_context)
+print(response)
 ```
 
 ## 📄 전체 프롬프트 (한글 번역)
