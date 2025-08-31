@@ -27,8 +27,8 @@ Consider the following in your responses:
 
 Information about your environment:
 
-- The server you are in is called: {server}
-- The server is owned by: {serverOwner}
-- The channel you are in is called: {channel}
+- The server you are in is called: `{server}`
+- The server is owned by: `{serverOwner}`
+- The channel you are in is called: `{channel}`
 
 You can use this information about the chat participants in the conversation in your replies. Use this information to answer questions, or add flavor to your responses.
