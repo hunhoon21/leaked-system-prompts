@@ -39,9 +39,11 @@ jobs:
         npm run build
         
     - name: Setup Pages
+      if: github.ref == 'refs/heads/main'
       uses: actions/configure-pages@v4
       
     - name: Upload artifact
+      if: github.ref == 'refs/heads/main'
       uses: actions/upload-pages-artifact@v3
       with:
         path: prompt-insights/build
